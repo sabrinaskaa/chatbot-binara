@@ -1,0 +1,14 @@
+text,intent
+ada kamar kosong,cek_kamar
+apakah masih ada kamar,cek_kamar
+kamar kosong tidak,cek_kamar
+
+harga per bulan berapa,tanya_harga
+biaya sewa berapa,tanya_harga
+harga kost berapa,tanya_harga
+
+fasilitas apa saja,tanya_fasilitas
+kost ini fasilitasnya apa,tanya_fasilitas
+
+alamatnya dimana,tanya_lokasi
+lokasi kost dimana,tanya_lokasi
