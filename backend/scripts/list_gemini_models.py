@@ -1,0 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()  # <-- INI WAJIB
+
+from google import genai
+
+client = genai.Client()
+
+for m in client.models.list():
+    print(m.name)
