@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.ai.intent import detect_intent
+from backend.app.ai.intent_ml import detect_intent
 from app.ai.tools import tool_list_available_rooms
 
 def chat_agent(message: str, db: Session) -> str:

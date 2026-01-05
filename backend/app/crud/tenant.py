@@ -6,8 +6,8 @@ def list_tenants(db: Session):
     return db.query(Tenant).order_by(Tenant.id.asc()).all()
 
 def create_tenant(db: Session, data: TenantCreate):
-    tenant = Tenant(**data.model_dump())
-    db.add(tenant)
+    t = Tenant(**data.model_dump())
+    db.add(t)
     db.commit()
-    db.refresh(tenant)
-    return tenant
+    db.refresh(t)
+    return t

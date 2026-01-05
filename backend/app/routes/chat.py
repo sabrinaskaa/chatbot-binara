@@ -1,25 +1,23 @@
+# backend/app/routes/chat.py
 from fastapi import APIRouter
-from pydantic import BaseModel
 
+from app.schemas.chat import ChatRequest, ChatResponse
 from app.services.intent_classifier import IntentClassifier
 from app.services.response_generator import generate_response
 
-router = APIRouter()
+router = APIRouter(tags=["chat"])
 classifier = IntentClassifier()
 
-class ChatRequest(BaseModel):
-    message: str
-
-class ChatResponse(BaseModel):
-    intent: str
-    reply: str
 
 @router.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
-    intent = classifier.predict(request.message)
-    reply = generate_response(intent)
+def chat(req: ChatRequest):
+    # predict() sekarang pasti return 2 value
+    intent, confidence = classifier.predict(req.message)
 
-    return {
-        "intent": intent,
-        "reply": reply
-    }
+    reply = generate_response(
+        intent=intent,
+        message=req.message,
+        confidence=confidence,
+    )
+
+    return {"intent": intent, "reply": reply}

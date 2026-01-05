@@ -13,7 +13,7 @@ engine = create_engine(
     DATABASE_URL,
     echo=True,
     pool_pre_ping=True,
-    connect_args={"connect_timeout": 5},  # ✅ biar gak hang selamanya
+    connect_args={"connect_timeout": 5},
 )
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)

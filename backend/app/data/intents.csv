@@ -1,14 +1,24 @@
-text,intent
-ada kamar kosong,cek_kamar
-apakah masih ada kamar,cek_kamar
-kamar kosong tidak,cek_kamar
+text,label
+kamar kosong ada?,check_availability
+ada kamar kosong?,check_availability
+yang available apa saja?,check_availability
+kamar deluxe kosong?,check_availability
+single ada?,check_availability
 
-harga per bulan berapa,tanya_harga
-biaya sewa berapa,tanya_harga
-harga kost berapa,tanya_harga
+harga kamar berapa?,ask_price
+harga deluxe berapa?,ask_price
+sewa per bulan berapa?,ask_price
+biaya kamar single?,ask_price
 
-fasilitas apa saja,tanya_fasilitas
-kost ini fasilitasnya apa,tanya_fasilitas
+saya mau survey kost,book_visit
+mau lihat kamar besok,book_visit
+booking kunjungan tanggal 2025-12-28,book_visit
 
-alamatnya dimana,tanya_lokasi
-lokasi kost dimana,tanya_lokasi
+ac kamar rusak,create_ticket
+air bocor di kamar,create_ticket
+lampu mati di kamar,create_ticket
+
+fasilitasnya meliputi apa saja?,ask_facilities
+
+halo,general
+terima kasih,general

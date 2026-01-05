@@ -1,22 +1,23 @@
+# backend/app/ai/gemini_client.py
 import os
-from dotenv import load_dotenv
 from google import genai
 
-load_dotenv()
 
-def gemini_generate(text: str) -> str:
+def ask_gemini(prompt: str) -> str:
     api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        return "Gemini API key belum diset."
-    
-    client = genai.Client()
     model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
+    if not api_key:
+        # jangan error 500, balikin pesan yang manusiawi
+        return "Maaf, fitur AI (Gemini) belum diaktifkan."
+
     try:
+        client = genai.Client(api_key=api_key)
         resp = client.models.generate_content(
             model=model,
-            contents=text,
+            contents=prompt,
         )
-        return getattr(resp, "text", None) or "Tidak ada respon dari Gemini."
-    except Exception as e:
-        return f"(Gemini error) {e}"
+        text = getattr(resp, "text", None)
+        return (text or "").strip() or "Maaf, Gemini tidak memberikan jawaban."
+    except Exception:
+        return "Maaf, terjadi gangguan saat menghubungi Gemini."

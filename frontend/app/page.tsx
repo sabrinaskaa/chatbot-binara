@@ -1,9 +1,9 @@
-import ChatBox from "@/components/ChatBox";
-
 export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <ChatBox />
+    <main style={{ padding: 24 }}>
+      <h1>Binara Kost</h1>
+      <p>Demo Chatbot untuk owner & pencari kost.</p>
+      <a href="/chat">Buka Chat</a>
     </main>
   );
 }
