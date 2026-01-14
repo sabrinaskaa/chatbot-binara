@@ -13,6 +13,7 @@ def main():
     X = df["text"].astype(str).tolist()
     y = df["label"].astype(str).tolist()
 
+
     clf = Pipeline([
         ("tfidf", TfidfVectorizer(ngram_range=(1,2), lowercase=True)),
         ("lr", LogisticRegression(max_iter=2000))

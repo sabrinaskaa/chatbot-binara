@@ -7,7 +7,7 @@ from app.ai import tools
 TOOL_SCHEMA = """
 Kamu boleh memilih salah satu tool berikut. Output WAJIB JSON saja (tanpa markdown).
 Tools:
-1) list_available_rooms {"tool":"list_available_rooms","room_type":"single|deluxe|null"}
+1) list_available_rooms {"tool":"list_available_rooms","room_type":"single|sharing|null"}
 2) create_visit {"tool":"create_visit","name":"...","phone":"...","preferred_date":"YYYY-MM-DD"}
 3) create_ticket {"tool":"create_ticket","room_code":"A1","description":"..."}
 4) check_unpaid {"tool":"check_unpaid","phone":"..."}

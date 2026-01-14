@@ -24,8 +24,8 @@ def main():
     rooms = [
         Room(code="A1", type="single", price=900000, facilities={"ac": True, "bathroom": "inside"}, status="available"),
         Room(code="A2", type="single", price=850000, facilities={"ac": False, "bathroom": "outside"}, status="occupied"),
-        Room(code="B1", type="deluxe", price=1200000, facilities={"ac": True, "bathroom": "inside", "wifi": True}, status="available"),
-        Room(code="B2", type="deluxe", price=1300000, facilities={"ac": True, "bathroom": "inside", "water_heater": True}, status="maintenance"),
+        Room(code="B1", type="sharing", price=1200000, facilities={"ac": True, "bathroom": "inside", "wifi": True}, status="available"),
+        Room(code="B2", type="sharing", price=1300000, facilities={"ac": True, "bathroom": "inside", "water_heater": True}, status="maintenance"),
     ]
     db.add_all(rooms)
     db.commit()

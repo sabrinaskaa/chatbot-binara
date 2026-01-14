@@ -4,7 +4,7 @@ from app.models import Room, Ticket, VisitRequest, Tenant, Payment
 
 def list_available_rooms(db: Session, room_type: str | None = None) -> str:
     q = db.query(Room).filter(Room.status == "available")
-    if room_type in ("single","deluxe"):
+    if room_type in ("single","sharing"):
         q = q.filter(Room.type == room_type)
     rooms = q.order_by(Room.price.asc()).all()
     if not rooms:

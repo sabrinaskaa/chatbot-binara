@@ -2,11 +2,11 @@ text,label
 kamar kosong ada?,check_availability
 ada kamar kosong?,check_availability
 yang available apa saja?,check_availability
-kamar deluxe kosong?,check_availability
+apakah ada kamar sharing kosong?,check_availability
 single ada?,check_availability
 
 harga kamar berapa?,ask_price
-harga deluxe berapa?,ask_price
+harga sharing berapa?,ask_price
 sewa per bulan berapa?,ask_price
 biaya kamar single?,ask_price
 

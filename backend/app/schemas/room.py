@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any, Literal
 
 class RoomBase(BaseModel):
     code: str
-    type: Literal["single", "deluxe"]
+    type: Literal["single", "sharing"]
     price: int
     facilities: Optional[Dict[str, Any]] = None
     status: Literal["available", "occupied", "maintenance"] = "available"

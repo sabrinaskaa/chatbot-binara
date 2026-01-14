@@ -18,7 +18,7 @@ def chat(message: str, db: Session, session_id: str) -> str:
         return reply
 
     if intent == "ask_price" and conf >= 0.55:
-        reply = "Harga tergantung tipe: single biasanya lebih murah dari deluxe. Tulis: 'kamar kosong deluxe' biar aku list plus harganya."
+        reply = "Harga tergantung tipe: single biasanya lebih murah dari sharing. Tulis: 'kamar kosong sharing' biar aku list plus harganya."
         memory_store.add(session_id, "bot", reply)
         return reply
 
