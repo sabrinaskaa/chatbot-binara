@@ -1,27 +1,26 @@
 from fastapi import APIRouter, Depends
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from app.db import get_db
+from app.services.guardrail import classify
+from app.services.answer import fetch_context
+from app.services.gemini import generate_answer
 
-from app.schemas.chat import ChatRequest, ChatResponse
-from app.services.intent_classifier import IntentClassifier
-from app.services.response_generator import generate_response
-from app.database import get_db
+router = APIRouter()
 
-router = APIRouter(tags=["chat"])
-classifier = IntentClassifier()
+class ChatIn(BaseModel):
+    message: str
 
+@router.post("/chat")
+def chat(payload: ChatIn, db: Session = Depends(get_db)):
+    g = classify(payload.message)
 
-@router.post("/chat", response_model=ChatResponse)
-def chat(req: ChatRequest, db: Session = Depends(get_db)):
-    intent, confidence = classifier.predict(req.message)
+    if not g.in_scope:
+        return {
+            "answer": "Saya cuma bisa bantu hal-hal tentang Kost Binara ya. "
+                      "Anda bisa bertanya mengenai kamar yang tersedia, harga, fasilitas, aturan, pembayaran, laundry terdekat."
+        }
 
-    reply = generate_response(
-        intent=intent,
-        message=req.message,
-        confidence=confidence,
-        db=db,  # ⬅️ INI PENTING
-    )
-
-    return {
-        "intent": intent,
-        "reply": reply,
-    }
+    ctx = fetch_context(db, intent=g.intent, kost_id=1)
+    answer = generate_answer(payload.message, ctx)
+    return {"answer": answer, "intent": g.intent}
