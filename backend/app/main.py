@@ -27,8 +27,8 @@ app = FastAPI(title="Binara Kost API")
 origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins or ["http://localhost:3000"],
-    allow_credentials=False,
+    allow_origins=["*"],
+    allow_credentials=False,  # penting! kalau "*", ini harus False
     allow_methods=["*"],
     allow_headers=["*"],
 )
