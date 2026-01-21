@@ -16,6 +16,8 @@ from app.services.answer import fetch_context
 from app.services.gemini import generate_answer
 
 load_dotenv()
+if not os.getenv("VERCEL"):
+    load_dotenv()
 
 app = FastAPI(title="Binara Kost API")
 
