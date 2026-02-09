@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from "react";
 
 type KostInfo = {
   name?: string;
-  tagline?: string;
   address?: string;
   whatsapp?: string;
   google_maps_url?: string;
@@ -79,7 +78,7 @@ function Glass({
     <div
       className={cx(
         "rounded-3xl border border-white/10 bg-white/[0.05] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,.04)]",
-        className
+        className,
       )}
     >
       {children}
@@ -119,7 +118,7 @@ function ActionButton({
       <div
         className={cx(
           base,
-          "bg-white/5 border-white/10 text-white/40 cursor-not-allowed select-none"
+          "bg-white/5 border-white/10 text-white/40 cursor-not-allowed select-none",
         )}
       >
         <span>{icon}</span>
@@ -135,7 +134,6 @@ function ActionButton({
     >
       <span className="text-base">{icon}</span>
       {label}
-      <span className="opacity-70">→</span>
     </Link>
   );
 }
@@ -196,7 +194,7 @@ function RoomCard({ r }: { r: Room }) {
             "rounded-full px-3 py-1 text-xs border",
             avail
               ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-200"
-              : "bg-rose-500/10 border-rose-500/20 text-rose-200"
+              : "bg-rose-500/10 border-rose-500/20 text-rose-200",
           )}
         >
           {avail ? "Tersedia" : "Penuh"}
@@ -235,7 +233,7 @@ function RoomCard({ r }: { r: Room }) {
           href="/bot"
           className="text-sm text-white/80 hover:text-white transition"
         >
-          Buka chat →
+          Buka chat
         </Link>
       </div>
     </div>
@@ -257,9 +255,6 @@ function FloatingChatButton() {
             <div className="text-white/60 text-xs">
               kamar • harga • aturan • bayar
             </div>
-          </div>
-          <div className="ml-1 text-white/70 group-hover:text-white transition">
-            →
           </div>
         </div>
       </div>
@@ -298,13 +293,12 @@ export default function Home() {
         setKost(
           kostJson || {
             name: "Binara Kost",
-            tagline: "Kost nyaman, info jelas, tinggal chat.",
             address: "Alamat belum diisi di database.",
             whatsapp: "",
             google_maps_url: "",
             visiting_hours: "",
             area_note: "Akses mudah & lingkungan aman.",
-          }
+          },
         );
 
         setRooms(
@@ -329,17 +323,13 @@ export default function Home() {
                   size_m2: 14,
                   facilities: "AC, WiFi, Kamar mandi dalam, Meja belajar",
                 },
-              ]
+              ],
         );
       } finally {
         setLoading(false);
       }
     })();
   }, [apiBase]);
-
-  const tagline =
-    kost?.tagline ||
-    "Cari kost tanpa ribet — lihat info, lalu tanya lewat chat.";
 
   return (
     <main className="min-h-screen text-white">
@@ -360,7 +350,7 @@ export default function Home() {
               href="/bot"
               className="rounded-2xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15 transition text-sm font-medium"
             >
-              Buka Chatbot →
+              Buka Chatbot
             </Link>
           </div>
         </Glass>
@@ -373,20 +363,14 @@ export default function Home() {
             <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-fuchsia-500/20 blur-3xl" />
             <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-indigo-500/20 blur-3xl" />
 
-            <div className="flex flex-wrap gap-2">
-              <Pill>✨ Info kost cepat</Pill>
-              <Pill>🔒 Fokus Kost Binara</Pill>
-              <Pill>⚡ Jawaban jelas</Pill>
-            </div>
-
             <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight">
               {kost?.name || "Binara Kost"}{" "}
-              <span className="text-white/65">
-                — tinggal chat kalau mau detail.
-              </span>
             </h1>
 
-            <p className="mt-3 text-white/70 leading-relaxed">{tagline}</p>
+            <p className="mt-3 text-white/70 leading-relaxed">
+              Kost Semarang tengah kota. Anda dapat chat untuk informasi lebih
+              lanjut!
+            </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <ActionButton
@@ -452,7 +436,7 @@ export default function Home() {
                         target="_blank"
                         className="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-white/10 border border-white/10 hover:bg-white/15 transition text-sm"
                       >
-                        Chat WA →
+                        Chat WA
                       </a>
                     ) : (
                       <div className="text-xs text-white/45">
@@ -524,7 +508,7 @@ export default function Home() {
                 </div>
               ) : (
                 <RoomCard key={i} r={r} />
-              )
+              ),
           )}
         </div>
       </section>
