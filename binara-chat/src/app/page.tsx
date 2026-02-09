@@ -31,12 +31,6 @@ function formatPhoneToWa(raw?: string) {
   return digits;
 }
 
-function moneyIDR(v: any) {
-  const n = Number(String(v ?? "").replace(/[^\d]/g, ""));
-  if (!Number.isFinite(n) || n <= 0) return "";
-  return "Rp " + n.toLocaleString("id-ID");
-}
-
 function cx(...a: Array<string | false | undefined | null>) {
   return a.filter(Boolean).join(" ");
 }
@@ -152,79 +146,6 @@ function SectionTitle({ title }: { title: string }) {
     <div className="mb-4">
       <div className="text-xl sm:text-2xl font-semibold tracking-tight mt-1">
         {title}
-      </div>
-    </div>
-  );
-}
-
-function RoomCard({ r }: { r: Room }) {
-  const price = moneyIDR(r.price_monthly);
-  const dep = moneyIDR(r.deposit);
-  const avail = r.is_available ?? true;
-
-  const chips = (r.facilities || "")
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean)
-    .slice(0, 4);
-
-  return (
-    <div className="group rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 hover:bg-white/[0.06] transition shadow-[0_0_0_1px_rgba(255,255,255,.03)]">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="text-white font-semibold">
-            {r.title || r.code || "Kamar"}
-          </div>
-          <div className="text-white/55 text-sm mt-0.5">
-            {r.size_m2 ? `${r.size_m2} m²` : "Nyaman & rapi"}
-          </div>
-        </div>
-        <div
-          className={cx(
-            "rounded-full px-3 py-1 text-xs border",
-            avail
-              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-200"
-              : "bg-rose-500/10 border-rose-500/20 text-rose-200",
-          )}
-        >
-          {avail ? "Tersedia" : "Penuh"}
-        </div>
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        <div className="rounded-2xl bg-black/25 border border-white/10 px-3 py-2">
-          <div className="text-xs text-white/55">Harga / bulan</div>
-          <div className="font-semibold">{price || "—"}</div>
-        </div>
-        <div className="rounded-2xl bg-black/25 border border-white/10 px-3 py-2">
-          <div className="text-xs text-white/55">Deposit</div>
-          <div className="font-semibold">{dep || "—"}</div>
-        </div>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {chips.length ? (
-          chips.map((c, i) => (
-            <span
-              key={i}
-              className="text-xs rounded-full px-3 py-1 bg-white/10 border border-white/10 text-white/75"
-            >
-              {c}
-            </span>
-          ))
-        ) : (
-          <span className="text-sm text-white/50">Fasilitas belum diisi.</span>
-        )}
-      </div>
-
-      <div className="mt-4 flex items-center justify-between">
-        <div className="text-xs text-white/45">Tanya detail lewat chat</div>
-        <Link
-          href="/bot"
-          className="text-sm text-white/80 hover:text-white transition"
-        >
-          Buka chat
-        </Link>
       </div>
     </div>
   );
@@ -440,30 +361,6 @@ export default function Home() {
                 </div>
               </div>
             </Glass>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Glass className="p-5">
-                <div className="text-sm font-semibold">Yang bisa ditanya</div>
-                <ul className="mt-3 text-sm text-white/75 space-y-2">
-                  <li>• Kamar tersedia + harga</li>
-                  <li>• Fasilitas kamar/umum</li>
-                  <li>• Aturan & jam malam</li>
-                  <li>• Pembayaran, deposit, listrik</li>
-                  <li>• Laundry terdekat (kalau ada data)</li>
-                </ul>
-              </Glass>
-
-              <Glass className="p-5">
-                <div className="text-sm font-semibold">Yang bakal ditolak</div>
-                <div className="mt-3 text-sm text-white/70 leading-relaxed">
-                  Pertanyaan di luar topik Kost Binara biar gak ngaco. Jadi
-                  chatbot lo keliatan “punya batasan”, bukan asal jawab.
-                </div>
-                <div className="mt-3 text-xs text-white/50">
-                  contoh: tugas kuliah random, politik, dll.
-                </div>
-              </Glass>
-            </div>
           </div>
         </div>
       </section>
