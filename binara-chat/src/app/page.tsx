@@ -147,22 +147,12 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SectionTitle({
-  kicker,
-  title,
-  desc,
-}: {
-  kicker: string;
-  title: string;
-  desc?: string;
-}) {
+function SectionTitle({ title }: { title: string }) {
   return (
     <div className="mb-4">
-      <div className="text-xs text-white/55">{kicker}</div>
       <div className="text-xl sm:text-2xl font-semibold tracking-tight mt-1">
         {title}
       </div>
-      {desc ? <div className="text-white/70 mt-1">{desc}</div> : null}
     </div>
   );
 }
@@ -412,11 +402,7 @@ export default function Home() {
           {/* RIGHT COLUMN */}
           <div className="grid gap-4">
             <Glass className="p-6">
-              <SectionTitle
-                kicker="INFO INTI"
-                title="Kontak & Lokasi"
-                desc="Biar user yakin dulu sebelum chat."
-              />
+              <SectionTitle title="Kontak & Lokasi" />
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
                   <div className="text-xs text-white/55">📍 Alamat</div>
@@ -482,124 +468,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROOMS PREVIEW */}
-      <section className="max-w-6xl mx-auto px-5 pb-10">
-        <SectionTitle
-          kicker="PREVIEW"
-          title="Kamar yang ada"
-          desc="Ini cuma preview. Detail lengkap? tinggal chat."
-        />
-
-        <div className="grid md:grid-cols-2 gap-4">
-          {(loading ? Array.from({ length: 2 }) : rooms.slice(0, 4)).map(
-            (r: any, i) =>
-              loading ? (
-                <div
-                  key={i}
-                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 animate-pulse"
-                >
-                  <div className="h-5 w-40 bg-white/10 rounded mb-3" />
-                  <div className="h-4 w-24 bg-white/10 rounded mb-6" />
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="h-14 bg-white/10 rounded-2xl" />
-                    <div className="h-14 bg-white/10 rounded-2xl" />
-                  </div>
-                  <div className="mt-4 h-8 bg-white/10 rounded-2xl" />
-                </div>
-              ) : (
-                <RoomCard key={i} r={r} />
-              ),
-          )}
-        </div>
-      </section>
-
-      {/* LOCATION / MAP */}
-      <section className="max-w-6xl mx-auto px-5 pb-14">
-        <div className="grid lg:grid-cols-2 gap-6">
-          <Glass className="p-6">
-            <SectionTitle
-              kicker="LOKASI"
-              title="Arah & akses"
-              desc="Biar user gak takut nyasar."
-            />
-            <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
-              <div className="text-xs text-white/55">Alamat</div>
-              <div className="mt-1 text-white/90 leading-relaxed">
-                {kost?.address || "—"}
-              </div>
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-3">
-              <ActionButton
-                href={kost?.google_maps_url || undefined}
-                label="Buka Google Maps"
-                icon="🗺️"
-                variant="ghost"
-                disabled={!kost?.google_maps_url}
-              />
-              <ActionButton
-                href="/bot"
-                label="Tanya akses lewat chat"
-                icon="💬"
-                variant="ghost"
-              />
-            </div>
-
-            <div className="mt-4 text-sm text-white/60">
-              Tip: kalau lo punya “patokan” (misal dekat minimarket/gerbang),
-              taruh di DB biar makin meyakinkan.
-            </div>
-          </Glass>
-
-          <Glass className="p-6">
-            <SectionTitle
-              kicker="CTA"
-              title="Ready buat survey?"
-              desc="Klik chat, nanti bot bantu jawab sebelum kamu datang."
-            />
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-fuchsia-500/15 to-indigo-500/15 p-5">
-              <div className="text-white/85">
-                Kalau mau tanya:
-                <div className="mt-3 grid sm:grid-cols-2 gap-3 text-sm text-white/75">
-                  <div className="rounded-2xl bg-black/25 border border-white/10 p-3">
-                    ✅ Kamar kosong
-                  </div>
-                  <div className="rounded-2xl bg-black/25 border border-white/10 p-3">
-                    ✅ Biaya tambahan
-                  </div>
-                  <div className="rounded-2xl bg-black/25 border border-white/10 p-3">
-                    ✅ Aturan kost
-                  </div>
-                  <div className="rounded-2xl bg-black/25 border border-white/10 p-3">
-                    ✅ Fasilitas
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 flex flex-wrap gap-3">
-                <ActionButton
-                  href="/bot"
-                  label="Chat sekarang"
-                  icon="💬"
-                  variant="solid"
-                />
-                <ActionButton
-                  href={wa ? `https://wa.me/${wa}` : undefined}
-                  label="WhatsApp pemilik"
-                  icon="📲"
-                  variant="ghost"
-                  disabled={!wa}
-                />
-              </div>
-            </div>
-          </Glass>
-        </div>
-      </section>
-
       <FloatingChatButton />
 
       <footer className="max-w-6xl mx-auto px-5 pb-10 text-white/40 text-xs">
-        © {new Date().getFullYear()} Binara Kost — landing page + chatbot.
+        © {new Date().getFullYear()} Binara Kost.
       </footer>
     </main>
   );
